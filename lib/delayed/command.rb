@@ -104,8 +104,8 @@ module Delayed
       worker_index = 0
       @worker_pools.each do |queues, worker_count|
         options = @options.merge(:queues => queues)
-        worker_count.times do
-          process_name = "delayed_job.#{queues.join(?.)}#{worker_index}"
+        worker_count.times do |index|
+          process_name = "delayed_job.#{queues.join(?.)}.#{index}"
           run_process(process_name, options)
           worker_index += 1
         end
